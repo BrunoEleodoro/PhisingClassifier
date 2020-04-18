@@ -2,8 +2,9 @@ const fs = require('fs');
 const request = require("request");
 
 async function main() {
-	let i = 10000;
-	// var res = [];
+	let i = process.env.START;
+	let limite = process.env.LIMITE;
+	var res = [];
 	var options = {
 		method: 'GET',
 		url: '',
@@ -20,7 +21,7 @@ async function main() {
 		}
 	};
 
-	while (i < 14366) {
+	while (i < limite) {
 		console.log('while', i)
 		options.url = `https://catalogodefraudes.rnp.br/frauds/${i}`
 		let response = await doRequest(options)
@@ -38,13 +39,13 @@ async function main() {
 		}
 
 		if (title != "") {
-            var res = await read('./fraudes.json')
-            res = JSON.parse(res)
+			var res = await read(`./fraudes${i}.json`)
+			res = JSON.parse(res)
 			res.push({
 				title: title,
 				description: description
-            })
-            await save('./fraudes.json', JSON.stringify(res))
+			})
+			await save(`./fraudes${i}.json`, JSON.stringify(res))
 		}
 		i++;
 	}
@@ -66,17 +67,17 @@ function doRequest(options) {
 }
 
 function save(filename, contents) {
-    return new Promise((resolve, reject) => {
-        fs.writeFileSync(filename, contents)
-        resolve(true)
-    })
+	return new Promise((resolve, reject) => {
+		fs.writeFileSync(filename, contents)
+		resolve(true)
+	})
 }
 
 function read(filename) {
-    return new Promise((resolve, reject) => {
-        
-        resolve(fs.readFileSync(filename))
-    })
+	return new Promise((resolve, reject) => {
+
+		resolve(fs.readFileSync(filename))
+	})
 }
 
 main();
