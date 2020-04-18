@@ -25,17 +25,24 @@ async function main() {
 		options.url = `https://catalogodefraudes.rnp.br/frauds/${i}`
 		let response = await doRequest(options)
 
-		let title = response.split('<h4>Assunto da mensagem:')
-		title = title[1].split('</h4>')[0].trim()
+		var title = ""
+		var description = ""
 
-		let description = response.split('###############################################################################\n\n')
-		description = description[1].split('</pre>')[0]
+		if (response.includes('<h4>Assunto da mensagem:')) {
+			title = response.split('<h4>Assunto da mensagem:')
+			title = title[1].split('</h4>')[0].trim()
+		}
+		if (response.includes('###############################################################################')) {
+			description = response.split('###############################################################################\n\n')
+			description = description[1].split('</pre>')[0]
+		}
 
-		res.push({
-			title: title,
-			description: description
-		})
-
+		if (title != "") {
+			res.push({
+				title: title,
+				description: description
+			})
+		}
 		i++;
 	}
 
