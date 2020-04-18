@@ -39,13 +39,13 @@ async function main() {
 		}
 
 		if (title != "") {
-			var res = await read(`./fraudes${i}.json`)
+			var res = await read(`./fraudes${limite}.json`)
 			res = JSON.parse(res)
 			res.push({
 				title: title,
 				description: description
 			})
-			await save(`./fraudes${i}.json`, JSON.stringify(res))
+			await save(`./fraudes${limite}.json`, JSON.stringify(res))
 		}
 		i++;
 	}
