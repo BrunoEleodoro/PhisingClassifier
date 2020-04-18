@@ -14,3 +14,4 @@ docker run -d --env START=11001 --env LIMITE=12000 -v "$PWD":/usr/src/app -w /us
 docker run -d --env START=12001 --env LIMITE=13000 -v "$PWD":/usr/src/app -w /usr/src/app node:12 npm start
 docker run -d --env START=13001 --env LIMITE=14000 -v "$PWD":/usr/src/app -w /usr/src/app node:12 npm start
 docker run -d --env START=14001 --env LIMITE=14347 -v "$PWD":/usr/src/app -w /usr/src/app node:12 npm start
+# docker run -v "$PWD":/usr/src/app -w /usr/src/app node:12 node juntar.js
