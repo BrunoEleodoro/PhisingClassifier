@@ -4,9 +4,7 @@ const fs = require('fs');
 async function main() {
 	let i = 1;
 	var res = [];
-	const browser = await puppeteer.launch({
-		headless: true
-	});
+	const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], headless:true});
 
 	while (i < 14366) {
 		console.log('while', i)
@@ -28,7 +26,8 @@ async function main() {
 
 	fs.writeFileSync('./fraudes.json', JSON.stringify(res))
 
-	await browser.close();
+    await browser.close();
+    process.exit(0)
 }
 
 main();
