@@ -22,7 +22,7 @@ let res = []
 let i = 0
 while (i < filenames.length) {
 	console.log('i', i)
-	let contents = JSON.parse(fs.readFileSync(`./fraudes${i + 1}.json`))
+	let contents = JSON.parse(fs.readFileSync(`./fraudes${filenames[i]}.json`))
 	let k = 0
 	while (k < contents.length) {
 		res.push(contents[k])
