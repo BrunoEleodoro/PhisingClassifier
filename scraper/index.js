@@ -2,8 +2,8 @@ const fs = require('fs');
 const request = require("request");
 
 async function main() {
-	let i = 1;
-	var res = [];
+	let i = 10000;
+	// var res = [];
 	var options = {
 		method: 'GET',
 		url: '',
@@ -38,16 +38,19 @@ async function main() {
 		}
 
 		if (title != "") {
+            var res = await read('./fraudes.json')
+            res = JSON.parse(res)
 			res.push({
 				title: title,
 				description: description
-			})
+            })
+            await save('./fraudes.json', JSON.stringify(res))
 		}
 		i++;
 	}
 
 
-	fs.writeFileSync('./fraudes.json', JSON.stringify(res))
+	// fs.writeFileSync('./fraudes.json', JSON.stringify(res))
 	process.exit(0)
 }
 
@@ -60,6 +63,20 @@ function doRequest(options) {
 			resolve(body)
 		});
 	})
+}
+
+function save(filename, contents) {
+    return new Promise((resolve, reject) => {
+        fs.writeFileSync(filename, contents)
+        resolve(true)
+    })
+}
+
+function read(filename) {
+    return new Promise((resolve, reject) => {
+        
+        resolve(fs.readFileSync(filename))
+    })
 }
 
 main();
