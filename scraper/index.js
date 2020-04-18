@@ -75,8 +75,13 @@ function save(filename, contents) {
 
 function read(filename) {
 	return new Promise((resolve, reject) => {
+		if (fs.existsSync(filename)) {
+			resolve(fs.readFileSync(filename))
+		} else {
+			fs.writeFileSync(filename, '[]')
+			resolve(fs.readFileSync(filename))
+		}
 
-		resolve(fs.readFileSync(filename))
 	})
 }
 
