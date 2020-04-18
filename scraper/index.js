@@ -5,7 +5,7 @@ async function main() {
 	let i = 1;
 	var res = [];
 	const browser = await puppeteer.launch({
-		headless: false
+		headless: true
 	});
 
 	while (i < 14366) {
