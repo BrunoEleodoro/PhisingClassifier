@@ -14,7 +14,7 @@ function main() {
 
 	classifier.train()
 
-	classifier.save('./fraudes_model.json', () => {
+	classifier.save('./fraudes_model_logistic.json', () => {
 		process.exit(0)
 	});
 
