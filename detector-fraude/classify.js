@@ -1,5 +1,5 @@
 const natural = require('natural')
-const classifier = new natural.LogisticRegressionClassifier()
+const classifier = new natural.BayesClassifier()
 const fs = require('fs')
 
 natural.BayesClassifier.load('./fraudes_model_logistic.json', null, (err, classifier) => {

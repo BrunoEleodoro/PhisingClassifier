@@ -1,5 +1,5 @@
 const natural = require('natural')
-const classifier = new natural.LogisticRegressionClassifier()
+const classifier = new natural.BayesClassifier()
 const fs = require('fs')
 
 function main() {
@@ -14,7 +14,7 @@ function main() {
 
 	classifier.train()
 
-	classifier.save('./fraudes_model_logistic.json', () => {
+	classifier.save('./fraudes_model.json', () => {
 		process.exit(0)
 	});
 
