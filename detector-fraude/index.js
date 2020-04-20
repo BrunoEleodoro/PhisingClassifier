@@ -1,5 +1,5 @@
 const natural = require('natural')
-const classifier = new natural.BayesClassifier()
+const classifier = new natural.LogisticRegressionClassifier()
 const fs = require('fs')
 
 function main() {
